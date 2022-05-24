@@ -12,6 +12,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Template.Data.Context;
+using Template.IoC;
 
 namespace Template
 {
@@ -29,7 +30,7 @@ namespace Template
         {
 
             services.AddDbContext<TemplateContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TemplateDB")).EnableSensitiveDataLogging());
-            //NativeInjector.RegisterServices(services);
+            NativeInjectors.RegisterServices(services);
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
