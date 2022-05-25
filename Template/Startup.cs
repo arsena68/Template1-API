@@ -11,6 +11,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Template.Application.AutoMapper;
 using Template.Data.Context;
 using Template.IoC;
 
@@ -29,8 +30,10 @@ namespace Template
         public void ConfigureServices(IServiceCollection services)
         {
 
-            services.AddDbContext<TemplateContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TemplateDB")).EnableSensitiveDataLogging());
+            services.AddDbContext<TemplateContext>(opt => opt.UseSqlServer(Configuration.GetConnectionString("TemplateDB")).EnableSensitiveDataLogging());            
             NativeInjectors.RegisterServices(services);
+
+           services.AddAutoMapper(typeof(AutoMapperSetup));
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
